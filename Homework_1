@@ -1,0 +1,25 @@
+import subprocess
+
+'''Задание 1.
+
+Условие:
+Написать функцию на Python, которой передаются в качестве параметров команда и текст. 
+Функция должна возвращать True, если команда успешно выполнена и текст найден в её выводе и False 
+в противном случае. 
+Передаваться должна только одна строка, разбиение вывода использовать не нужно'''
+
+
+def find_text(command, text):
+    result = subprocess.run("cat /home/ubuntu/PycharmProjects/pythonProject/venv/pyvenv.cfg",
+                            stdout=subprocess.PIPE, encoding='utf-8', shell=True)
+
+    if text in str(result):
+
+        print(True)
+
+    else:
+
+        print(False)
+
+
+find_text('rm --help', 'bin')
