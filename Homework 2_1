@@ -1,1 +1,48 @@
+from Sem_1 import checkout, getout
 
+folder_in = '/home/ubuntu/tst'
+folder_out = '/home/ubuntu/out'
+folder_ext = '/home/ubuntu/folder1'
+folder_ext2 = '/home/ubuntu/folder2'
+
+
+
+def test_step1():
+    # assert checkout(f"cd {folder_in}; 7z a {folder_out}/arx2", "Everything is Ok"), "test1 FAIL"
+    res = checkout(f"cd {folder_in}; 7z a {folder_out}/arx2", "Everything is Ok"), "test1 FAIL"
+    res2 = checkout(f'ls {folder_out}', 'arx2.7z')
+
+    assert res and res2, "test6py FAIL"
+
+def test_step2():
+    #test 2
+    res1 = checkout(f"cd {folder_out}; 7z e arx2.7z -o{folder_ext} -y", "Everything is Ok"), "test2 FAIL"
+    res2 = checkout(f'ls {folder_ext}', 'test1.txt')
+    res3 = checkout(f'ls {folder_ext}', 'test2.txt')
+    assert res1 and res2 and res3, "test7 FAIL"
+
+def test_step3():
+    assert checkout(f"cd {folder_out}; 7z t arx2.7z", "Everything is Ok"), "test3 FAIL"
+
+
+def test_step4():
+    assert checkout(f"cd {folder_in}; 7z u {folder_out}/arx2", "Everything is Ok"), "test4 FAIL"
+
+
+def test_step5():
+    res1 = checkout('cd {}; 7z l arx2.7z'.format(folder_out, folder_ext), 'test1.txt')
+    res2 = checkout('cd {}; 7z l arx2.7z'.format(folder_out, folder_ext), 'test2.txt')
+    assert res1 and res2, "test5 FAIL"
+
+def test_step6():
+    assert checkout('cd {}; 7z x arx2.7z -o{} -y'.format(folder_out, folder_ext2), "Everything is Ok"), "test6 FAIL"
+
+
+def test_step7():
+    assert checkout(f"cd {folder_out}; 7z d arx2.7z", "Everything is Ok"), "test7 FAIL"
+
+def test_step8():
+    res1 = checkout('cd {}; 7z h test1.txt'.format(folder_in), "Everything is Ok"), "test8 FAIL"
+    hash = getout('cd {}; crc32 test1.txt'.format(folder_in)).upper()
+    res2 = checkout('cd {}; 7z h test1.txt'.format(folder_in), hash)
+    assert res1 and res2, "test8 FAIL"
