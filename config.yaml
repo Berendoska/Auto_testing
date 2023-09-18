@@ -1,0 +1,9 @@
+folder_in: /home/ubuntu/tst
+folder_out: /home/ubuntu/out
+folder_ext: /home/ubuntu/folder1
+folder_ext2: /home/ubuntu/folder2
+count: 5
+bs: 1M
+folder_bad: /home/ubuntu/folder3
+stat_file_dir: /home/ubuntu/folder_stat
+arc_type: zip
